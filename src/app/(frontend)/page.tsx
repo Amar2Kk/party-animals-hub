@@ -11,6 +11,7 @@ export default async function HomePage() {
   const payloadConfig = await config
   const payload = await getPayload({ config: payloadConfig })
   const { user } = await payload.auth({ headers })
+  const maps = await payload.find({ collection: 'Maps' })
 
   const fileURL = `vscode://file/${fileURLToPath(import.meta.url)}`
 
@@ -46,6 +47,22 @@ export default async function HomePage() {
             Documentation
           </a>
         </div>
+      </div>
+      <div className="mt-8">
+        <h2 className="text-xl font-bold">Maps</h2>
+        <ul>
+          {maps.docs.map((map) => (
+            <li key={map.id} className="mt-2">
+              <Image
+                alt={map.name}
+                height={150}
+                src={map.image.url}
+                width={150}/>
+              <h3 className="text-lg font-semibold">{map.name}</h3>
+              <p>{map.description}</p>
+            </li>
+          ))}
+        </ul>
       </div>
       <div className="mt-8 text-center">
         <p>Update this page by editing</p>
