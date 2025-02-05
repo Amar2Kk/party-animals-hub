@@ -5,7 +5,6 @@ import React from 'react'
 import { fileURLToPath } from 'url'
 
 import config from '@/payload.config'
-import './styles.css'
 
 export default async function HomePage() {
   const headers = await getHeaders()
@@ -16,8 +15,8 @@ export default async function HomePage() {
   const fileURL = `vscode://file/${fileURLToPath(import.meta.url)}`
 
   return (
-    <div className="home">
-      <div className="content">
+    <div className="p-4">
+      <div className="max-w-4xl mx-auto">
         <picture>
           <source srcSet="https://raw.githubusercontent.com/payloadcms/payload/main/packages/ui/src/assets/payload-favicon.svg" />
           <Image
@@ -27,11 +26,11 @@ export default async function HomePage() {
             width={65}
           />
         </picture>
-        {!user && <h1>Welcome to your new project.</h1>}
-        {user && <h1>Welcome back, {user.email}</h1>}
-        <div className="links">
+        {!user && <h1 className="text-2xl font-bold">Welcome to your new project.</h1>}
+        {user && <h1 className="text-2xl font-bold">Welcome back, {user.email}</h1>}
+        <div className="mt-4">
           <a
-            className="admin"
+            className="text-blue-500 hover:underline"
             href={payloadConfig.routes.admin}
             rel="noopener noreferrer"
             target="_blank"
@@ -39,7 +38,7 @@ export default async function HomePage() {
             Go to admin panel
           </a>
           <a
-            className="docs"
+            className="text-blue-500 hover:underline ml-4"
             href="https://payloadcms.com/docs"
             rel="noopener noreferrer"
             target="_blank"
@@ -48,9 +47,9 @@ export default async function HomePage() {
           </a>
         </div>
       </div>
-      <div className="footer">
+      <div className="mt-8 text-center">
         <p>Update this page by editing</p>
-        <a className="codeLink" href={fileURL}>
+        <a className="text-blue-500 hover:underline" href={fileURL}>
           <code>app/(frontend)/page.tsx</code>
         </a>
       </div>
