@@ -11,6 +11,11 @@ import { Media } from './collections/Media'
 import { Pages } from './collections/Pages'
 import { Posts } from './collections/Posts'
 import { Users } from './collections/Users'
+import { Characters } from './collections/Characters'
+import { Skins } from './collections/Characters/Skins'
+import { Traits } from './collections/Characters/Traits'
+import { Variants } from './collections/Characters/Skins/Variants'
+import { Rarity } from './collections/Characters/Skins/Variants/Rarity'
 import { Footer } from './Footer/config'
 import { Header } from './Header/config'
 import { plugins } from './plugins'
@@ -61,7 +66,7 @@ export default buildConfig({
       connectionString: process.env.DATABASE_URI || '',
     },
   }),
-  collections: [Pages, Posts, Media, Categories, Users],
+  collections: [Pages, Posts, Media, Categories, Users, Characters, Traits, Rarity, Variants, Skins],
   cors: [getServerSideURL()].filter(Boolean),
   globals: [Header, Footer],
   plugins: [

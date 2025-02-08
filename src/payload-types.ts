@@ -16,6 +16,11 @@ export interface Config {
     media: Media;
     categories: Category;
     users: User;
+    characters: Character;
+    traits: Trait;
+    rarity: Rarity;
+    variants: Variant;
+    skins: Skin;
     redirects: Redirect;
     forms: Form;
     'form-submissions': FormSubmission;
@@ -32,6 +37,11 @@ export interface Config {
     media: MediaSelect<false> | MediaSelect<true>;
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
+    characters: CharactersSelect<false> | CharactersSelect<true>;
+    traits: TraitsSelect<false> | TraitsSelect<true>;
+    rarity: RaritySelect<false> | RaritySelect<true>;
+    variants: VariantsSelect<false> | VariantsSelect<true>;
+    skins: SkinsSelect<false> | SkinsSelect<true>;
     redirects: RedirectsSelect<false> | RedirectsSelect<true>;
     forms: FormsSelect<false> | FormsSelect<true>;
     'form-submissions': FormSubmissionsSelect<false> | FormSubmissionsSelect<true>;
@@ -672,6 +682,103 @@ export interface Form {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "characters".
+ */
+export interface Character {
+  id: number;
+  name: string;
+  description?: string | null;
+  releaseDate?: string | null;
+  traits?: (number | Trait)[] | null;
+  'Default Skin': number | Skin;
+  skins?: (number | Skin)[] | null;
+  rarity: number | Rarity;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "traits".
+ */
+export interface Trait {
+  id: number;
+  name: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "skins".
+ */
+export interface Skin {
+  id: number;
+  name: string;
+  description?: string | null;
+  image: number | Media;
+  releaseDate?: string | null;
+  rarity: number | Rarity;
+  variants?: (number | Variant)[] | null;
+  'is Obtainable': boolean;
+  'How to Obtain?'?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "rarity".
+ */
+export interface Rarity {
+  id: number;
+  name: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "variants".
+ */
+export interface Variant {
+  id: number;
+  name: string;
+  description?: string | null;
+  image: number | Media;
+  releaseDate?: string | null;
+  rarity: number | Rarity;
+  'is Obtainable': boolean;
+  'How to Obtain?'?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
 export interface Redirect {
@@ -861,6 +968,26 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'users';
         value: number | User;
+      } | null)
+    | ({
+        relationTo: 'characters';
+        value: number | Character;
+      } | null)
+    | ({
+        relationTo: 'traits';
+        value: number | Trait;
+      } | null)
+    | ({
+        relationTo: 'rarity';
+        value: number | Rarity;
+      } | null)
+    | ({
+        relationTo: 'variants';
+        value: number | Variant;
+      } | null)
+    | ({
+        relationTo: 'skins';
+        value: number | Skin;
       } | null)
     | ({
         relationTo: 'redirects';
@@ -1218,6 +1345,70 @@ export interface UsersSelect<T extends boolean = true> {
   hash?: T;
   loginAttempts?: T;
   lockUntil?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "characters_select".
+ */
+export interface CharactersSelect<T extends boolean = true> {
+  name?: T;
+  description?: T;
+  releaseDate?: T;
+  traits?: T;
+  'Default Skin'?: T;
+  skins?: T;
+  rarity?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "traits_select".
+ */
+export interface TraitsSelect<T extends boolean = true> {
+  name?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "rarity_select".
+ */
+export interface RaritySelect<T extends boolean = true> {
+  name?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "variants_select".
+ */
+export interface VariantsSelect<T extends boolean = true> {
+  name?: T;
+  description?: T;
+  image?: T;
+  releaseDate?: T;
+  rarity?: T;
+  'is Obtainable'?: T;
+  'How to Obtain?'?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "skins_select".
+ */
+export interface SkinsSelect<T extends boolean = true> {
+  name?: T;
+  description?: T;
+  image?: T;
+  releaseDate?: T;
+  rarity?: T;
+  variants?: T;
+  'is Obtainable'?: T;
+  'How to Obtain?'?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
